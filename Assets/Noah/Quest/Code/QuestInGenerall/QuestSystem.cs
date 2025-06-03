@@ -10,17 +10,19 @@ public class QuestSystem : ScriptableObject
     [System.Serializable]
     public class Info
     {
-        public string Name; // z. B. "Frühstück vorbereiten"
+        public string Name;
 
         [TextArea]
-        public string Description; // z. B. "Sammle Toast, Eier und Milch."
+        public string Description;
     }
 
     public Info Information;
-
     public List<QuestGoal> Goals;
     public bool Completed { get; private set; }
     public UnityEvent QuestCompleted;
+
+    [Header("Optionales UI-Feedback")]
+    public GameObject questCompletionImage; // Bild, das bei Abschluss aktiviert wird
 
     public void Initialize()
     {
@@ -42,10 +44,12 @@ public class QuestSystem : ScriptableObject
         {
             QuestCompleted?.Invoke();
             QuestCompleted.RemoveAllListeners();
+
+            if (questCompletionImage != null)
+                questCompletionImage.SetActive(true); // UI-Bild anzeigen
         }
     }
 
-    // Diese Methoden werden vom UI Script benötigt
     public string GetTitle() => Information.Name;
     public string GetDescription() => Information.Description;
 }
