@@ -1,17 +1,67 @@
 using UnityEngine;
 
-// Script an einem Item-GameObject, das eingesammelt werden kann
 public class BreakfastItemPickup : MonoBehaviour
 {
-    public BreakfastItem Item;           // Referenz zum ScriptableObject (im Inspector setzen)
-    public PlayerInventory PlayerInventory; // Referenz auf das Inventar des Spielers
+    public BreakfastItem Item;
+    public PlayerInventory PlayerInventory;
+
+    [Header("Pickup Optionen")]
+    public bool pickupOnTouch = true;
+    public bool pickupOnLookAndKey = true;
+    public KeyCode pickupKey = KeyCode.E;
+    public float lookPickupDistance = 3f;
+
+    private bool isLookedAt = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (pickupOnTouch && other.CompareTag("Player"))
         {
-            PlayerInventory.CollectItem(Item); // Item einsammeln
-            Destroy(gameObject);                // Objekt entfernen
+            Collect();
         }
+    }
+
+    private void Update()
+    {
+        if (pickupOnLookAndKey)
+        {
+            CheckLookAndPickup();
+        }
+
+        if (!isLookedAt)
+        {
+            PickupHintUIManager.Instance?.HideHint();
+        }
+    }
+
+    private void CheckLookAndPickup()
+    {
+        isLookedAt = false;
+
+        Camera cam = Camera.main;
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, lookPickupDistance))
+        {
+            if (hit.collider.gameObject == gameObject)
+            {
+                isLookedAt = true;
+
+                PickupHintUIManager.Instance?.ShowHint("Drücke E zum Aufsammeln");
+
+                if (Input.GetKeyDown(pickupKey))
+                {
+                    Collect();
+                }
+            }
+        }
+    }
+
+    private void Collect()
+    {
+        PickupHintUIManager.Instance?.HideHint();
+        PlayerInventory.CollectItem(Item);
+        Destroy(gameObject);
     }
 }
