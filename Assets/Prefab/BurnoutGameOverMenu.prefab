@@ -282,6 +282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   burnoutScale: {fileID: 0}
   gameOverCanvas: {fileID: 679109097938351463}
+  gameOverSound: {fileID: 8300000, guid: 09660359d576d0741a8c7a0a0eea0f86, type: 3}
+  soundVolume: 1
 --- !u!1 &2248590219032496212
 GameObject:
   m_ObjectHideFlags: 0
