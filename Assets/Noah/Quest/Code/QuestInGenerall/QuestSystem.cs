@@ -16,8 +16,26 @@ public class QuestSystem : ScriptableObject
         public string Description;
     }
 
+    [System.Serializable]
+    public class QuestReward
+    {
+        public string rewardName;
+        public int amount;
+    }
+
     public Info Information;
     public List<QuestGoal> Goals;
+
+    [Header("Belohnungen")]
+    public List<QuestReward> Rewards = new List<QuestReward>();  // WICHTIG: Initialisierung hier!
+
+    [Header("Burnout Meter Integration")]
+    [Tooltip("Referenz auf das BurnoutScale-Objekt, das beeinflusst werden soll")]
+    public BurnoutScale burnoutScale;
+
+    [Tooltip("Wie stark der Burnout-Wert bei Questabschluss verändert wird (positiv oder negativ)")]
+    public int burnoutValueChange = 0;
+
     public bool Completed { get; private set; }
     public UnityEvent QuestCompleted;
 
@@ -64,8 +82,12 @@ public class QuestSystem : ScriptableObject
         if (Completed) return;
 
         Completed = Goals.All(g => g.Completed);
+
         if (Completed)
         {
+            GiveRewards();
+            ApplyBurnoutChange();
+
             QuestCompleted?.Invoke();
             QuestCompleted.RemoveAllListeners();
 
@@ -74,12 +96,35 @@ public class QuestSystem : ScriptableObject
         }
     }
 
+    private void GiveRewards()
+    {
+        if (Rewards == null || Rewards.Count == 0)
+        {
+            Debug.LogWarning("Keine Belohnungen definiert!");
+            return;
+        }
+
+        foreach (var reward in Rewards)
+        {
+            Debug.Log($"Belohnung erhalten: {reward.rewardName} x{reward.amount}");
+            // Hier kannst du deine Belohnungslogik ergänzen, z.B. Inventar erweitern oder XP geben
+        }
+    }
+
+    private void ApplyBurnoutChange()
+    {
+        if (burnoutScale == null)
+            return;
+
+        int neuerWert = burnoutScale.current + burnoutValueChange;
+        burnoutScale.current = Mathf.Clamp(neuerWert, burnoutScale.minimum, burnoutScale.maximum);
+
+        Debug.Log($"BurnoutScale wurde um {burnoutValueChange} verändert. Neuer Wert: {burnoutScale.current}");
+    }
+
     public string GetTitle() => Information.Name;
     public string GetDescription() => Information.Description;
 
-    /// <summary>
-    /// Entfernt alle Event-Listener, z.B. wenn die Quest entfernt wird.
-    /// </summary>
     public void Cleanup()
     {
         foreach (var goal in Goals)
