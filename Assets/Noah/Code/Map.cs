@@ -24,5 +24,9 @@ public class Map : MonoBehaviour
         SceneManager.LoadScene("Shop");
     }
 
+    public void LoadWork()
+    {
+        SceneManager.LoadScene("Work");
+    }
 
 }
