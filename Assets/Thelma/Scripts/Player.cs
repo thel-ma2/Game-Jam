@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     //Input System
     private InputSystem_Actions playerControls;
     private Vector2 movementInput;
-    // private Vector2 lookInput;
 
     private GameObject currentMitbewohner;
 

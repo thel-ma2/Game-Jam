@@ -7,9 +7,7 @@ using UnityEngine.TestTools;
 public class Mitbewohner : MonoBehaviour
 {
     SphereCollider myTrigger;
-
     private bool conversation = false;
-
 
     //Components
     NavMeshAgent myAgent;
@@ -30,9 +28,7 @@ public class Mitbewohner : MonoBehaviour
     {
 
         if (isStandingAround == false)
-        {
             RandomWalk();
-        }
     }
 
     void RandomWalk()
