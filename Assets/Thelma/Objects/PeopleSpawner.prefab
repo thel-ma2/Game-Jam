@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7158157556056621019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7496299625348988504}
+  - component: {fileID: 2216256210436619235}
+  m_Layer: 0
+  m_Name: PeopleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7496299625348988504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158157556056621019}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 310, y: 0, z: 18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2216256210436619235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158157556056621019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b107c3c0ca890d4f83103a83a02c2fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  person1: {fileID: 7661856714465147012, guid: 198276526a969ce4fb5060ede62045c8, type: 3}
+  person2: {fileID: 2346581683455517133, guid: 20702a7d358754145ba356feda6ec636, type: 3}
+  person3: {fileID: 7268211153587434386, guid: 76651b533cb9f074c83d7b0d7d8e89de, type: 3}
+  person4: {fileID: 2326559976267099153, guid: 4b430cbb0e38e8a418891f642c8bf745, type: 3}
+  person5: {fileID: 3977229474512921694, guid: 70bd556c599c09445b538068dd973228, type: 3}
+  person6: {fileID: 3492499873014176036, guid: a27c199364fe8da47ad970f6ba38b623, type: 3}
+  person7: {fileID: 1821042388000861776, guid: 640e5e29cc1b158489363292ea449789, type: 3}
+  person8: {fileID: 7451580501534207058, guid: 636e4eabc1721164eb7aa24df334c0d0, type: 3}
+  person9: {fileID: 8496993387702406223, guid: 7de7549e783b4b14abc63e3d73efc866, type: 3}
+  person10: {fileID: 656856150773348671, guid: 031e9887b7ab17c459ea2d02a45820c2, type: 3}
+  spawnRate: 2

@@ -7,6 +7,11 @@ public class PeopleSpawner : MonoBehaviour
     public GameObject person3;
     public GameObject person4;
     public GameObject person5;
+    public GameObject person6;
+    public GameObject person7;
+    public GameObject person8;
+    public GameObject person9;
+    public GameObject person10;
 
     private GameObject[] people;
 
@@ -22,7 +27,7 @@ public class PeopleSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        people = new GameObject[] { person1, person2, person3, person4, person5 };      // alle GameObjects in einem Array
+        people = new GameObject[] { person1, person2, person3, person4, person5, person6, person7, person8, person9, person10 };      // alle GameObjects in einem Array
         heightOffset = new float[] { offset1, offset2, 18, offset3, offset4 };
         spawnPerson();
     }
