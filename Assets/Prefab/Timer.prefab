@@ -268,6 +268,8 @@ MonoBehaviour:
   endScreenUI: {fileID: 6139197096764263280}
   timeBeforeSceneSwitch: 3
   nextSceneName: Map
+  audioSource: {fileID: 0}
+  warningClip: {fileID: 8300000, guid: bd6d9e823b1410047861bee3fb639d66, type: 3}
 --- !u!1 &6139197096764263280
 GameObject:
   m_ObjectHideFlags: 0
