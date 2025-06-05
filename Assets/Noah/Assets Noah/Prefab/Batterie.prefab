@@ -234,44 +234,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8461013752284286070, guid: 482282f2b71f14b4484226541924579d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 880425675571000732}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 482282f2b71f14b4484226541924579d, type: 3}
 --- !u!224 &7622185109784809722 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7404755764863931666, guid: 482282f2b71f14b4484226541924579d, type: 3}
   m_PrefabInstance: {fileID: 1082423962912376296}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8323761126254573133 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8972993994943935397, guid: 482282f2b71f14b4484226541924579d, type: 3}
-  m_PrefabInstance: {fileID: 1082423962912376296}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8821995274543745438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bcff2b1404a09e489fbbe1d68c294ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &8821995274543745438 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8461013752284286070, guid: 482282f2b71f14b4484226541924579d, type: 3}
-  m_PrefabInstance: {fileID: 1082423962912376296}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &880425675571000732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8821995274543745438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58701aa039fd8a45adf9a5386f2b33b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  batterieBar: {fileID: 8323761126254573133}
-  damageAmount: 10
-  healAmount: 10
