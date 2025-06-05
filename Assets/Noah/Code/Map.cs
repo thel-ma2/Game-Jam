@@ -3,30 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class Map : MonoBehaviour
 {
-   
-    public void LoadHome()
+    public void LoadNextScene()
     {
-        SceneManager.LoadScene("Home");
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentIndex + 1);
     }
-
-    public void LoadLibrary()
-    {
-        SceneManager.LoadScene("Library");
-    }
-
-    public void LoadPark()
-    {
-        SceneManager.LoadScene("Park");
-    }
-
-    public void LoadShop()
-    {
-        SceneManager.LoadScene("Shop");
-    }
-
-    public void LoadWork()
-    {
-        SceneManager.LoadScene("Work");
-    }
-
 }
