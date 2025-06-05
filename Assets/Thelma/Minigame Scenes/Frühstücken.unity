@@ -519,7 +519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &403937792
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1268,7 +1268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &1109192397
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1542,7 +1542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &1355056467
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4019,7 +4019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 735730098980666010, guid: 98b6bd0fcbcf6c440acc7b485fdddc07, type: 3}
       propertyPath: m_Radius
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 735730098980666010, guid: 98b6bd0fcbcf6c440acc7b485fdddc07, type: 3}
       propertyPath: m_Center.y
@@ -6233,7 +6233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &8544783546918526926
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -1,16 +1,17 @@
 using UnityEngine;
 
+[System.Serializable]
 public class Item : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public ItemManager manager;
+    
+    private void OnTriggerEnter(Collider collider)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collider.gameObject.tag == "Player")
+        {
+            manager.GetComponent<ItemManager>().isFound = true;
+            manager.GetComponent<ItemManager>().ItemFound();
+            Destroy(gameObject);
+        }
     }
 }
