@@ -227,3 +227,5 @@ MonoBehaviour:
   sceneToLoad: Map
   switchSceneAfterUI: 1
   sceneSwitchDelay: 3
+  warningSound: {fileID: 8300000, guid: ef8ddfa321da5054dba67a26c95412ff, type: 3}
+  soundVolume: 1
