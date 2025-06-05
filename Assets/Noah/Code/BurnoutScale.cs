@@ -11,8 +11,8 @@ public class BurnoutScale : MonoBehaviour
     public int current = 50;
 
     [Header("X-Positionsgrenzen (Editor-basiert)")]
-    public float minimumX = 0f;  
-    public float maximumX = 200f; 
+    public float minimumX = 0f;  // Position ganz links
+    public float maximumX = 200f; // Position ganz rechts
 
     [Header("UI-Elemente")]
     public RectTransform pointer;
@@ -20,28 +20,45 @@ public class BurnoutScale : MonoBehaviour
 
     void Update()
     {
-        if (pointer == null || maximum == minimum)
-            return;
+        if (pointer == null)
+        {
+            return; // Falls kein Zeiger gesetzt wurde, abbrechen
+        }
+
+        if (maximum == minimum)
+        {
+            return; // Division durch Null vermeiden
+        }
 
         UpdatePointerPosition();
     }
 
     void UpdatePointerPosition()
     {
-        // Prozentwert berechnen
-        float t = Mathf.Clamp01((float)(current - minimum) / (maximum - minimum));
+        // Berechne, wie weit der aktuelle Wert zwischen Minimum und Maximum liegt (als Wert zwischen 0 und 1)
+        float t = (float)(current - minimum) / (maximum - minimum);
 
-        // Interpolation zwischen min und max X
-        float newX = Mathf.Lerp(minimumX, maximumX, t);
+        // Clamp auf 0 bis 1, um Über-/Unterlauf zu verhindern
+        t = Mathf.Clamp01(t);
 
-        // X-Position setzen
-        Vector2 anchoredPos = pointer.anchoredPosition;
-        anchoredPos.x = newX;
-        pointer.anchoredPosition = anchoredPos;
+        // Da rechts das Minimum sein soll und links das Maximum, drehen wir den Wert um
+        // Wenn t = 0 (current = minimum), soll der Zeiger an maximumX (rechts) sein
+        // Wenn t = 1 (current = maximum), soll der Zeiger an minimumX (links) sein
+        float invertedT = 1f - t;
 
-        // Optional: Farbe setzen
-        Image img = pointer.GetComponent<Image>();
-        if (img != null)
-            img.color = color;
+        // Position zwischen minimumX (links) und maximumX (rechts) berechnen anhand des invertierten Wertes
+        float neueXPosition = Mathf.Lerp(minimumX, maximumX, invertedT);
+
+        // Die neue Position als AnchoredPosition für das RectTransform setzen
+        Vector2 aktuellePosition = pointer.anchoredPosition;
+        aktuellePosition.x = neueXPosition;
+        pointer.anchoredPosition = aktuellePosition;
+
+        // Optional: Farbe des Zeigers setzen, falls ein Image-Component dran ist
+        Image zeigerBild = pointer.GetComponent<Image>();
+        if (zeigerBild != null)
+        {
+            zeigerBild.color = color;
+        }
     }
 }
