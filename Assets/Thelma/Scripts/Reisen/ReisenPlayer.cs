@@ -6,6 +6,9 @@ public class ReisenPlayer : MonoBehaviour
     private BoxCollider2D Collider;
     private GameObject currentPerson;
 
+    public SocialBatterie socialBattery;          // Referenz auf die Batterie
+    public int conversationDrainAmount = 5;       // Wie viel die Batterie bei Gespräch verliert
+
     [Header("Numbers")]
     private int kPressCount = 0;
     [SerializeField] private int requiredKPressCount = 5;
@@ -41,8 +44,21 @@ public class ReisenPlayer : MonoBehaviour
 
     void EndConversation()
     {
-        currentPerson.GetComponent<People>().EndConversation();
+        if (currentPerson != null)
+        {
+            currentPerson.GetComponent<People>().EndConversation();
+        }
+
         conversation = false;
+        kPressCount = 0;
+
+        if (socialBattery != null)
+        {
+            socialBattery.current -= conversationDrainAmount;
+            if (socialBattery.current < socialBattery.minimum)
+                socialBattery.current = socialBattery.minimum;
+        }
+
         Debug.Log("Conversation ended, player can continue.");
     }
 

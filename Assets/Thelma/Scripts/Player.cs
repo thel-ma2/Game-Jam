@@ -3,6 +3,12 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+
+    [Header("Soziale Batterie")]
+    public SocialBatterie socialBattery;           // Referenz zur Batterieanzeige
+    public int conversationDrainAmount = 10;       // Wie viel bei einer Konversation verloren geht
+
+
     // grab/ take > sammeln + an Ziel ablegen
     // eat
 
@@ -89,10 +95,26 @@ public class Player : MonoBehaviour
 
     void EndConversation()
     {
-        currentMitbewohner.GetComponent<Mitbewohner>().EndConversation();
+        if (currentMitbewohner != null)
+        {
+            currentMitbewohner.GetComponent<Mitbewohner>().EndConversation();
+        }
+
         conversation = false;
+        kPressCount = 0;
+
+        // Soziale Batterie reduzieren
+        if (socialBattery != null)
+        {
+            socialBattery.current -= conversationDrainAmount;
+
+            if (socialBattery.current < socialBattery.minimum)
+                socialBattery.current = socialBattery.minimum;
+        }
+
         Debug.Log("Conversation ended, player can continue.");
     }
+
 
     public void StartConversation(GameObject mitbewohner)     // wird vom Mitbewohner aufgerufen
     {

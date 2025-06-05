@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SocialBatterieMinimumScreen : MonoBehaviour
 {
     public SocialBatterie socialBatterie;      // Verweis auf dein SocialBatterie-Script
     public GameObject lowEnergyScreen;         // UI-Element, das angezeigt werden soll
-    public string sceneToLoad = "";            // Name der Szene, die geladen werden soll
+    public string sceneToLoad = "";            // Name der Szene, die geladen werden soll (leer = nächste Szene)
     public bool switchSceneAfterUI = false;    // Ob Szene nach UI angezeigt werden soll
     public float sceneSwitchDelay = 3f;        // Sekunden bis Szenenwechsel
 
@@ -24,7 +25,6 @@ public class SocialBatterieMinimumScreen : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
-
         audioSource.playOnAwake = false;
     }
 
@@ -40,7 +40,7 @@ public class SocialBatterieMinimumScreen : MonoBehaviour
             Debug.Log("Minimum erreicht – UI aktiviert.");
             PlayWarningSound();
 
-            if (switchSceneAfterUI && !string.IsNullOrEmpty(sceneToLoad))
+            if (switchSceneAfterUI)
             {
                 StartCoroutine(LoadSceneAfterDelay());
             }
@@ -61,10 +61,22 @@ public class SocialBatterieMinimumScreen : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator LoadSceneAfterDelay()
+    private IEnumerator LoadSceneAfterDelay()
     {
         yield return new WaitForSeconds(sceneSwitchDelay);
-        Debug.Log("Szene wird geladen: " + sceneToLoad);
-        SceneManager.LoadScene(sceneToLoad);
+
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            Debug.Log("Szene wird geladen: " + sceneToLoad);
+            SceneManager.LoadScene(sceneToLoad);
+        }
+        else
+        {
+            // Nächste Szene im Build laden
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
+            Debug.Log("Szene wird geladen: Index " + nextSceneIndex);
+            SceneManager.LoadScene(nextSceneIndex);
+        }
     }
 }
