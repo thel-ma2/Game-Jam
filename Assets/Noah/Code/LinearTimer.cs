@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class TimerEndScreenAndSceneSwitch : MonoBehaviour
 {
@@ -17,15 +16,15 @@ public class TimerEndScreenAndSceneSwitch : MonoBehaviour
 
     [Header("UI bei Ende")]
     public GameObject endScreenUI;                // Aktiviertes UI bei Ende
-    public float timeBeforeSceneSwitch = 5f;      // Sekunden warten bis Szenenwechsel
-    public string nextSceneName;                  // Name der Zielszene
+    public float delayBeforeAdditionalUI = 2f;    // Sekunden warten bis weiteres UI erscheint
+    public GameObject additionalCanvasUI;         // Der zusätzliche Canvas
 
     [Header("Soundeffekt")]
     public AudioSource audioSource;               // AudioSource für Soundeffekt
     public AudioClip warningClip;                 // Soundclip, der ab 80% gespielt wird
 
     private bool hasEnded = false;
-    private bool soundPlayed = false;             // Damit der Sound nur einmal gespielt wird
+    private bool soundPlayed = false;
 
     void Start()
     {
@@ -42,9 +41,11 @@ public class TimerEndScreenAndSceneSwitch : MonoBehaviour
         if (endScreenUI != null)
             endScreenUI.SetActive(false); // UI am Anfang deaktivieren
 
+        if (additionalCanvasUI != null)
+            additionalCanvasUI.SetActive(false); // Zweites UI auch deaktivieren
+
         if (audioSource == null && warningClip != null)
         {
-            // Falls keine AudioSource zugewiesen, eine hinzufügen
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = false;
         }
@@ -58,7 +59,6 @@ public class TimerEndScreenAndSceneSwitch : MonoBehaviour
         timer += Time.deltaTime;
         float t = Mathf.Clamp01(timer / timerDuration);
 
-        // Sound abspielen, wenn 80% erreicht sind und noch nicht gespielt wurde
         if (!soundPlayed && t >= 0.8f && warningClip != null && audioSource != null)
         {
             audioSource.clip = warningClip;
@@ -66,7 +66,6 @@ public class TimerEndScreenAndSceneSwitch : MonoBehaviour
             soundPlayed = true;
         }
 
-        // Pointer-Position updaten
         if (pointer != null)
         {
             float newX = Mathf.Lerp(minimumX, maximumX, t);
@@ -75,7 +74,6 @@ public class TimerEndScreenAndSceneSwitch : MonoBehaviour
             pointer.anchoredPosition = pos;
         }
 
-        // Timer erreicht Maximum
         if (timer >= timerDuration)
         {
             timerRunning = false;
@@ -86,14 +84,15 @@ public class TimerEndScreenAndSceneSwitch : MonoBehaviour
             if (endScreenUI != null)
                 endScreenUI.SetActive(true);
 
-            if (!string.IsNullOrEmpty(nextSceneName))
-                Invoke(nameof(LoadNextScene), timeBeforeSceneSwitch);
+            // Nach einer Verzögerung weiteres UI aktivieren
+            if (additionalCanvasUI != null)
+                Invoke(nameof(ActivateAdditionalUI), delayBeforeAdditionalUI);
         }
     }
 
-    void LoadNextScene()
+    void ActivateAdditionalUI()
     {
-        Debug.Log("Wechsle zu Szene: " + nextSceneName);
-        SceneManager.LoadScene(nextSceneName);
+        Debug.Log("Aktiviere zusätzliches UI.");
+        additionalCanvasUI.SetActive(true);
     }
 }
