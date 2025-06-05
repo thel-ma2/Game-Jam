@@ -1,19 +1,28 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
-using Quest;
 using UnityEngine;
+using Quest;
 
-// QuestGoal, bei dem mehrere Frühstücksitems gesammelt werden müssen
 [CreateAssetMenu(menuName = "Quest System/Goals/Collect Multiple Breakfast Items")]
 public class CollectMultipleItemsGoal : QuestGoal
 {
-    // Welche Items und wie viele davon gesammelt werden müssen (im Inspector eintragen)
+    public string QuestName = "Neue Quest";
+
+    [Tooltip("Wenn aktiviert, mÃ¼ssen mehrere verschiedene Items gesammelt werden. Andernfalls wird nur das erste Item in der Liste verwendet.")]
+    public bool UseMultipleItemTypes = true;
+
     public List<BreakfastItem> RequiredItems = new List<BreakfastItem>();
     public List<int> RequiredAmounts = new List<int>();
 
-    // Interne Dictionaries für schnelle Abfragen
+    public GameObject InteractionObject;
+
     private Dictionary<BreakfastItem, int> requiredDict = new Dictionary<BreakfastItem, int>();
     private Dictionary<BreakfastItem, int> currentAmounts = new Dictionary<BreakfastItem, int>();
+
+    private bool allItemsCollected = false;
+    private bool interactionDone = false;
+
+    public bool InteractionRequired => InteractionObject != null;
 
     public override void Initialize()
     {
@@ -22,35 +31,76 @@ public class CollectMultipleItemsGoal : QuestGoal
         requiredDict.Clear();
         currentAmounts.Clear();
 
-        // Dict füllen, Annahme: RequiredItems & RequiredAmounts haben gleiche Länge
-        for (int i = 0; i < RequiredItems.Count; i++)
+        // Falls UseMultipleItemTypes false ist, nur das erste Item aus der Liste verwenden
+        if (!UseMultipleItemTypes && RequiredItems.Count > 0)
         {
-            var item = RequiredItems[i];
-            var amount = (i < RequiredAmounts.Count) ? RequiredAmounts[i] : 1;
+            var item = RequiredItems[0];
+            int amount = (RequiredAmounts.Count > 0) ? RequiredAmounts[0] : 1;
 
             requiredDict[item] = amount;
             currentAmounts[item] = 0;
         }
+        else
+        {
+            for (int i = 0; i < RequiredItems.Count; i++)
+            {
+                var item = RequiredItems[i];
+                var amount = (i < RequiredAmounts.Count) ? RequiredAmounts[i] : 1;
+
+                requiredDict[item] = amount;
+                currentAmounts[item] = 0;
+            }
+        }
+
+        allItemsCollected = false;
+        interactionDone = false;
     }
 
-    // Wird vom Inventory aufgerufen, wenn ein Item eingesammelt wurde
     public void OnItemCollected(BreakfastItem collectedItem)
     {
         if (requiredDict.ContainsKey(collectedItem))
         {
             currentAmounts[collectedItem]++;
-            Evaluate();
+            EvaluateCollection();
         }
     }
 
-    // Versteckt die Evaluate-Methode der Basisklasse, um Warnungen zu vermeiden
-    protected new void Evaluate()
+    private void EvaluateCollection()
     {
-        Completed = requiredDict.All(kvp => currentAmounts.ContainsKey(kvp.Key) && currentAmounts[kvp.Key] >= kvp.Value);
+        allItemsCollected = requiredDict.All(kvp =>
+            currentAmounts.ContainsKey(kvp.Key) &&
+            currentAmounts[kvp.Key] >= kvp.Value);
+    }
 
-        if (Completed)
+    public void OnInteractionDone()
+    {
+        if (allItemsCollected && InteractionRequired && !interactionDone)
         {
-            Complete(); // QuestGoal als abgeschlossen markieren
+            interactionDone = true;
+            Complete();
         }
+    }
+
+    public int GetCurrentAmount(BreakfastItem item)
+    {
+        if (currentAmounts.ContainsKey(item))
+            return currentAmounts[item];
+        return 0;
+    }
+
+    public int GetRequiredAmount(BreakfastItem item)
+    {
+        if (requiredDict.ContainsKey(item))
+            return requiredDict[item];
+        return 0;
+    }
+
+    public bool IsInteractionDone() => interactionDone;
+
+    public bool AreAllItemsCollected() => allItemsCollected;
+
+    public List<BreakfastItem> GetActiveItems()
+    {
+        return requiredDict.Keys.ToList();
     }
 }

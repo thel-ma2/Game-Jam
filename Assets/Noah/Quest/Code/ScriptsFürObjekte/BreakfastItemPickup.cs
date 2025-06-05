@@ -11,6 +11,9 @@ public class BreakfastItemPickup : MonoBehaviour
     public KeyCode pickupKey = KeyCode.E;
     public float lookPickupDistance = 3f;
 
+    [Header("Entfernen nach Aufheben")]
+    public bool destroyAfterPickup = true; // <-- NEU: Kontrolle im Inspector
+
     private bool isLookedAt = false;
 
     private void OnTriggerEnter(Collider other)
@@ -62,6 +65,19 @@ public class BreakfastItemPickup : MonoBehaviour
     {
         PickupHintUIManager.Instance?.HideHint();
         PlayerInventory.CollectItem(Item);
-        Destroy(gameObject);
+
+        if (destroyAfterPickup)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            // Nur Deaktivieren der Abholung
+            Collider col = GetComponent<Collider>();
+            if (col != null)
+                col.enabled = false;
+
+            this.enabled = false; // Deaktiviert das Script selbst
+        }
     }
 }
