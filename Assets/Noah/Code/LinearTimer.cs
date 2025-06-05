@@ -1,27 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimerEndScreenAndSceneSwitch : MonoBehaviour
 {
-    [Header("Timer-Einstellungen")]
-    public float timerDuration = 10f;             // Dauer des Timers
+    public float timerDuration = 10f;
     private float timer = 0f;
     private bool timerRunning = true;
 
-    [Header("Pointer-Einstellungen")]
     public RectTransform pointer;
     public float minimumX = 0f;
     public float maximumX = 200f;
     public Color pointerColor = Color.white;
 
-    [Header("UI bei Ende")]
-    public GameObject endScreenUI;                // Aktiviertes UI bei Ende
-    public float delayBeforeAdditionalUI = 2f;    // Sekunden warten bis weiteres UI erscheint
-    public GameObject additionalCanvasUI;         // Der zusätzliche Canvas
+    public GameObject endScreenUI;
+    public float delayBeforeSceneSwitch = 2f;
 
-    [Header("Soundeffekt")]
-    public AudioSource audioSource;               // AudioSource für Soundeffekt
-    public AudioClip warningClip;                 // Soundclip, der ab 80% gespielt wird
+    public AudioSource audioSource;
+    public AudioClip warningClip;
 
     private bool hasEnded = false;
     private bool soundPlayed = false;
@@ -39,10 +35,7 @@ public class TimerEndScreenAndSceneSwitch : MonoBehaviour
         }
 
         if (endScreenUI != null)
-            endScreenUI.SetActive(false); // UI am Anfang deaktivieren
-
-        if (additionalCanvasUI != null)
-            additionalCanvasUI.SetActive(false); // Zweites UI auch deaktivieren
+            endScreenUI.SetActive(false);
 
         if (audioSource == null && warningClip != null)
         {
@@ -79,20 +72,25 @@ public class TimerEndScreenAndSceneSwitch : MonoBehaviour
             timerRunning = false;
             hasEnded = true;
 
-            Debug.Log("Timer erreicht Maximum.");
-
             if (endScreenUI != null)
                 endScreenUI.SetActive(true);
 
-            // Nach einer Verzögerung weiteres UI aktivieren
-            if (additionalCanvasUI != null)
-                Invoke(nameof(ActivateAdditionalUI), delayBeforeAdditionalUI);
+            Invoke(nameof(SwitchScene), delayBeforeSceneSwitch);
         }
     }
 
-    void ActivateAdditionalUI()
+    void SwitchScene()
     {
-        Debug.Log("Aktiviere zusätzliches UI.");
-        additionalCanvasUI.SetActive(true);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.LogWarning("Keine weitere Szene im Build-Settings. Szene nicht gewechselt.");
+        }
     }
 }
