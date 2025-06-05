@@ -17,18 +17,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 061a8973cd7e10e449ecb85c7a7b3f19, type: 2}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+        m_TargetAssemblyTypeName: QuestSystem, Assembly-CSharp
+        m_MethodName: Initialize
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  QuestName: Neue Quest
+  UseMultipleItemTypes: 1
   RequiredItems:
   - {fileID: 11400000, guid: bcaaf6d257d17c048a43fe397e5f55a1, type: 2}
   - {fileID: 11400000, guid: c7f419e6e60232f4dae3b803aab089fc, type: 2}
   RequiredAmounts: 0100000001000000
+  InteractionObject: {fileID: 0}

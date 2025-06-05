@@ -4,20 +4,23 @@ using TMPro;
 public class PickupHintUIManager : MonoBehaviour
 {
     public static PickupHintUIManager Instance;
-
     public TMP_Text hintText;
 
     private void Awake()
     {
-        // Singleton-Setup
         if (Instance == null)
         {
             Instance = this;
-            hintText.gameObject.SetActive(false);
         }
         else
         {
             Destroy(gameObject);
+        }
+
+        if (hintText != null)
+        {
+            hintText.gameObject.SetActive(true); // Immer sichtbar
+            hintText.text = ""; // Start leer
         }
     }
 

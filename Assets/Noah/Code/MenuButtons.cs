@@ -12,14 +12,16 @@ public class MenuButtons : MonoBehaviour
 
     public void GoToLevelMenu()
     {
-        SceneManager.LoadScene("LevelSelection");
+        SceneManager.LoadScene(2);
     }
 
     public void GoToMainMenu()
 
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(0);
     }
+
+ 
     public void QuitGame()
     {
         Application.Quit();
