@@ -22,11 +22,21 @@ public class QuestSystem : ScriptableObject
     public UnityEvent QuestCompleted;
 
     [Header("Optionales UI-Feedback")]
-    public GameObject questCompletionImage; // Bild, das bei Abschluss aktiviert wird
+    public GameObject questCompletionImage;
+
+    [Header("Burnout Meter")]
+    [Tooltip("Diese Quest beeinflusst das Burnout Meter, wenn sie nicht abgeschlossen ist.")]
+    public bool affectsBurnoutMeter = false;
+
+    private bool initialized = false;
 
     public void Initialize()
     {
+        if (initialized) return;
+        initialized = true;
+
         Completed = false;
+
         if (QuestCompleted == null)
             QuestCompleted = new UnityEvent();
 
@@ -35,10 +45,24 @@ public class QuestSystem : ScriptableObject
             goal.Initialize();
             goal.GoalCompleted.AddListener(CheckGoals);
         }
+
+        if (EventManager.Instance != null)
+        {
+            EventManager.Instance.AddListener<SceneChangedEvent>(OnSceneChanged);
+        }
+
+        CheckGoals();
+    }
+
+    private void OnSceneChanged(SceneChangedEvent e)
+    {
+        CheckGoals();
     }
 
     private void CheckGoals()
     {
+        if (Completed) return;
+
         Completed = Goals.All(g => g.Completed);
         if (Completed)
         {
@@ -46,10 +70,26 @@ public class QuestSystem : ScriptableObject
             QuestCompleted.RemoveAllListeners();
 
             if (questCompletionImage != null)
-                questCompletionImage.SetActive(true); // UI-Bild anzeigen
+                questCompletionImage.SetActive(true);
         }
     }
 
     public string GetTitle() => Information.Name;
     public string GetDescription() => Information.Description;
+
+    /// <summary>
+    /// Entfernt alle Event-Listener, z.B. wenn die Quest entfernt wird.
+    /// </summary>
+    public void Cleanup()
+    {
+        foreach (var goal in Goals)
+        {
+            goal.GoalCompleted.RemoveListener(CheckGoals);
+        }
+
+        if (EventManager.Instance != null)
+        {
+            EventManager.Instance.RemoveListener<SceneChangedEvent>(OnSceneChanged);
+        }
+    }
 }

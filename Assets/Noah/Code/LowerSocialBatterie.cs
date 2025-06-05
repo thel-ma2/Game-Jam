@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-    public SocialBatterie batterieBar;  // Referenz auf dein SocialBatterie-Script
-    public int damageAmount = 10;       // Wie viel Schaden bei jedem Treffer abgezogen wird
+    public SocialBatterie batterieBar;     // Referenz auf dein SocialBatterie-Script
+    public int damageAmount = 10;          // Schaden bei jedem Treffer
+    public int healAmount = 10;            // Wie viel beim Heilen wiederhergestellt wird
 
     void Update()
     {
-        // Zum Test: Wenn du die Leertaste drückst, wird Schaden verursacht
+        // Leertaste = Schaden nehmen
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(damageAmount);
+        }
+
+        // H-Taste = heilen
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Heal(healAmount);
         }
     }
 
@@ -18,11 +25,21 @@ public class HealthManager : MonoBehaviour
     {
         if (batterieBar == null) return;
 
-        // Lebenspunkte abziehen, aber nicht unter minimum fallen lassen
         batterieBar.current -= damage;
         if (batterieBar.current < batterieBar.minimum)
         {
             batterieBar.current = batterieBar.minimum;
+        }
+    }
+
+    public void Heal(int amount)
+    {
+        if (batterieBar == null) return;
+
+        batterieBar.current += amount;
+        if (batterieBar.current > batterieBar.maximum)
+        {
+            batterieBar.current = batterieBar.maximum;
         }
     }
 }
