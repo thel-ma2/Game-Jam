@@ -800,6 +800,17 @@ Transform:
   - {fileID: 691663601}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &381831899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8659264394492022806, guid: 4659c9deda9611e43bb7815cd475b598, type: 3}
+  m_PrefabInstance: {fileID: 4449888932877413200}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139f3de95c3aa3e41a289275bfe22d62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,17 +1953,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723965411}
   m_CullTransparentMesh: 1
---- !u!114 &1928423194 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8323761126254573133, guid: 50fedfaca1a9f6c42884d08dee5336dd, type: 3}
-  m_PrefabInstance: {fileID: 6396427733291462740}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bcff2b1404a09e489fbbe1d68c294ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2085754768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2285,6 +2285,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BurnoutGameOverMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2035596570935810379, guid: 39789582a2bb4cf46b713ce202e32b01, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4866070225201013676, guid: 39789582a2bb4cf46b713ce202e32b01, type: 3}
       propertyPath: burnoutScale
       value: 
@@ -2328,6 +2332,10 @@ PrefabInstance:
     - target: {fileID: 6442720866067899646, guid: 39789582a2bb4cf46b713ce202e32b01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6582531106770714091, guid: 39789582a2bb4cf46b713ce202e32b01, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2383,9 +2391,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2434983489258786410, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
+      propertyPath: sceneToLoad
+      value: SupermarketDay2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434983489258786410, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
+      propertyPath: timerScript
+      value: 
+      objectReference: {fileID: 381831899}
+    - target: {fileID: 2434983489258786410, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
       propertyPath: socialBatterie
       value: 
-      objectReference: {fileID: 1928423194}
+      objectReference: {fileID: 0}
     - target: {fileID: 3759076299380645066, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
       propertyPath: m_Name
       value: BatterieEmptyMenu
@@ -2486,6 +2502,10 @@ PrefabInstance:
     - target: {fileID: 2324769068951643187, guid: 12b101c2f12b5fd4bac359350d28c197, type: 3}
       propertyPath: m_Name
       value: BrunOutMeter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718978644072086963, guid: 12b101c2f12b5fd4bac359350d28c197, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7909442576795240636, guid: 12b101c2f12b5fd4bac359350d28c197, type: 3}
       propertyPath: m_LocalPosition.x
