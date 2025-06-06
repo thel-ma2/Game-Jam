@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introImage: {fileID: 4523518663769248108}
-  introSound: {fileID: 8300000, guid: e73c950c581d34848a3e5106f4ffe1dd, type: 3}
+  introSound: {fileID: 0}
   soundVolume: 1
 --- !u!1 &4523518663769248108
 GameObject:

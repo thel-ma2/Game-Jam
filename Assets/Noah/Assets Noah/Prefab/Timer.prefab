@@ -260,15 +260,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139f3de95c3aa3e41a289275bfe22d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerDuration: 10
+  timerDuration: 2.43
   pointer: {fileID: 9198589514327487499}
   minimumX: -58
   maximumX: 135
   pointerColor: {r: 1, g: 1, b: 1, a: 1}
   endScreenUI: {fileID: 4807187228316559780}
   delayBeforeSceneSwitch: 2
-  audioSource: {fileID: 0}
-  warningClip: {fileID: 8300000, guid: bd6d9e823b1410047861bee3fb639d66, type: 3}
 --- !u!1 &6139197096764263280
 GameObject:
   m_ObjectHideFlags: 0

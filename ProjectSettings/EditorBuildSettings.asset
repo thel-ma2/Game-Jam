@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: c6a44638d423073438f790eb8dc6c5aa
   - enabled: 1
     path: Assets/Scenes/Day 1/ParkDay1.unity
-    guid: afdc8ae6a2bcc1342bb138abc634e028
+    guid: 38e52f049a3d8f744a7dcf33b7afd2d7
   - enabled: 1
     path: Assets/Scenes/Day 1/Map 2.unity
     guid: fc48ce53d5fd96e49aa94266cd064c62
@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Day 1/MapSupermarket.unity
     guid: 8e4712f6d38033b47a2374c676be3609
   - enabled: 1
-    path: Assets/Scenes/Day 1/SupermarketDay2.unity
+    path: Assets/Scenes/Day 1/SupermarketDay1.unity
     guid: 7f10b2b722fcbaf45a62331ffa68600b
   - enabled: 1
     path: Assets/Scenes/MapHomeDay2.unity
@@ -36,29 +36,35 @@ EditorBuildSettings:
     path: Assets/Scenes/HomeNight 1.unity
     guid: f6a530c952b04ca49b940aebc3d3acec
   - enabled: 1
-    path: Assets/Scenes/Day 2/HomeDay2.unity
-    guid: 2ef450153e578ea488b08ea69b315bd3
+    path: Assets/Scenes/Day 2/HomeDay2Beginning.unity
+    guid: 86793b5e6b554a74a984e93c20a46d85
   - enabled: 1
     path: Assets/Scenes/Day 1/Map 3.unity
     guid: ac22f24636aa2094a88ffc9c6c3d536c
   - enabled: 1
+    path: Assets/Scenes/Reisen/Reisen Minigame.unity
+    guid: 4b8a215a9645d01418b9dd10c064cf32
+  - enabled: 1
     path: Assets/Scenes/Day 2/LibraryDay2.unity
     guid: 901f90d657258e44d815979c38f10068
-  - enabled: 1
-    path: Assets/Scenes/Day 2/Map 5.unity
-    guid: 15b67b32233c7b3469871f0ffa35d724
-  - enabled: 0
-    path: Assets/Scenes/Day 2/HomeDay2.unity
-    guid: 2ef450153e578ea488b08ea69b315bd3
   - enabled: 1
     path: Assets/Scenes/Day 2/Map 4.unity
     guid: 35fefbd4fc0cecb4391a97f6f5ba15b5
   - enabled: 1
+    path: Assets/Scenes/Reisen/Reisen Minigame 1.unity
+    guid: 07c7bdc1e08c7494c81703b76076ffa1
+  - enabled: 1
     path: Assets/Scenes/Day 2/SupermarketDay2.unity
     guid: d5cc1ddc0913ce345ab7ef314cf05844
   - enabled: 1
-    path: Assets/Scenes/MapHomeDay2 2.unity
-    guid: 16ca1d0f6d184c94999c42220902c427
+    path: Assets/Scenes/Day 2/Map 5.unity
+    guid: 15b67b32233c7b3469871f0ffa35d724
+  - enabled: 1
+    path: Assets/Scenes/Reisen/Reisen Minigame 2.unity
+    guid: 6607da65b660c92429aeb7f32e157493
+  - enabled: 1
+    path: Assets/Scenes/Day 2/HomeDay2.unity
+    guid: 2ef450153e578ea488b08ea69b315bd3
   - enabled: 1
     path: Assets/Scenes/HomeNight 2.unity
     guid: 2462d7b344f743942ac236df281490b1
@@ -70,7 +76,7 @@ EditorBuildSettings:
     guid: 8d6b4d21d79ea42488e9bc4e10a36d11
   - enabled: 1
     path: Assets/Scenes/Day 3/ParkDay3.unity
-    guid: b96cc3fee4905f74bb9ef1a654042933
+    guid: c427417485290a04b8f0f10b502024a4
   - enabled: 1
     path: Assets/Scenes/Day 3/Map 7.unity
     guid: 4aa05666ca50b114d898299722762d61
@@ -80,6 +86,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Day 3/Map 8.unity
     guid: 6ece16bafca8ae342872e24df09a3f76
+  - enabled: 1
+    path: Assets/Scenes/Reisen/Reisen Minigame 3.unity
+    guid: ae2a37a3803434a4292690e4b41e0a1f
   - enabled: 1
     path: Assets/Scenes/Day 3/LibraryDay3.unity
     guid: 530b468245cabca448cb03d8d050da43
@@ -96,6 +105,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Day 3/Map 9.unity
     guid: a42048462585f3940a85f7624cc1d647
   - enabled: 1
+    path: Assets/Scenes/Reisen/Reisen Minigame 4.unity
+    guid: 083ba03ca2d141d47a35a97535f050f6
+  - enabled: 1
     path: Assets/Scenes/Day 4/SupermarketDay4.unity
     guid: 03b5c9b3e0d001d44bb3896d77347fef
   - enabled: 1
@@ -109,7 +121,7 @@ EditorBuildSettings:
     guid: c413c0d4a1407aa40993cd009d19d886
   - enabled: 1
     path: Assets/Scenes/Day 4/ParkDay4.unity
-    guid: becfdb145b0bc8142afeab3f6a11da06
+    guid: 5312b42f366dc474781146a2c5f43415
   - enabled: 1
     path: Assets/Scenes/MapHomeDay4.unity
     guid: 62026a2abc78eb546a8d2cedc5ee0b4d
@@ -123,11 +135,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Day 4/Map 12.unity
     guid: 7e3659b0530e5cc4fabb1bc4ad4d432b
   - enabled: 1
+    path: Assets/Scenes/Reisen/Reisen Minigame 5.unity
+    guid: 2131afad16f699c43a9fcc64a28a002e
+  - enabled: 1
     path: Assets/Scenes/Day5/LagerDay5.unity
     guid: 8fdbc0e3dbe84ac49abb9712a761e8b3
   - enabled: 1
     path: Assets/Scenes/Day5/Map 13.unity
     guid: ec85dca3773059e46a73105fba19fa1e
+  - enabled: 1
+    path: Assets/Scenes/Reisen/Reisen7.unity
+    guid: 92dc50957c3ba794ba3ed479b5e7e03e
   - enabled: 1
     path: Assets/Scenes/Day5/LibraryDay5.unity
     guid: 93b2eea1fa4952641aa6b38e2e7e38ce
@@ -135,10 +153,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Day5/Map 14.unity
     guid: 9f114dcbb40bc5544ad412389a465551
   - enabled: 1
+    path: Assets/Scenes/Reisen/Reisen Minigame 6.unity
+    guid: 6eeb78d069933dc4a839baf4d2f27409
+  - enabled: 1
     path: Assets/Scenes/Day5/SupermarketDay5.unity
     guid: e4adfcd5793e2194387de4f5457cc04b
   - enabled: 1
-    path: Assets/Scenes/MapHomeDay4 1.unity
+    path: Assets/Scenes/MapHomeDay5.unity
     guid: 2911df6d721d0b9428c2bf32acd2e6ef
   - enabled: 1
     path: Assets/Scenes/HomeNight 6.unity

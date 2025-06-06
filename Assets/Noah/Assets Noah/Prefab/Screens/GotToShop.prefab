@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introImage: {fileID: 6922905931278407972}
-  introSound: {fileID: 8300000, guid: e73c950c581d34848a3e5106f4ffe1dd, type: 3}
+  introSound: {fileID: 0}
   soundVolume: 1
 --- !u!1 &4209560220964725336
 GameObject:
@@ -294,8 +294,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Click left mouse button to continue
 
-    you need to press 2 times on
-    a button'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

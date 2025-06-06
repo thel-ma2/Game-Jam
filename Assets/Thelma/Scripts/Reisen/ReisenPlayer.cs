@@ -10,7 +10,7 @@ public class ReisenPlayer : MonoBehaviour
     private GameObject background2;
     private GameObject peopleSpawner;
 
-    //Input System
+    // Input System
     private InputSystem_Actions playerControls;
     private Vector2 movementInput;
 
@@ -22,18 +22,33 @@ public class ReisenPlayer : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     public bool conversation = false;
 
+    private BurnoutScale socialBattery;  // socialBattery automatisch zugewiesen
+    [SerializeField] private int conversationDrainAmount = 1;
+
     private void Awake()
     {
         playerControls = new InputSystem_Actions();
         myCharacterController = GetComponent<CharacterController>();
 
+        // Automatisch das GameObject mit Namen "Progress Bar" finden und BurnoutScale zuweisen
+        GameObject progressBarObj = GameObject.Find("Progress Bar");
+        if (progressBarObj != null)
+        {
+            socialBattery = progressBarObj.GetComponent<BurnoutScale>();
+            if (socialBattery == null)
+                Debug.LogWarning("BurnoutScale-Komponente nicht auf 'Progress Bar' gefunden.");
+        }
+        else
+        {
+            Debug.LogWarning("GameObject mit Namen 'Progress Bar' wurde nicht gefunden.");
+        }
+
         playerControls.Enable();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        transform.position = new Vector3 (-100, 0, 18);
+        transform.position = new Vector3(-100, 0, 18);
 
         background = GameObject.FindWithTag("Background");
         background2 = GameObject.FindWithTag("Background2");
@@ -45,17 +60,14 @@ public class ReisenPlayer : MonoBehaviour
 
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
-        // Read the movement value when the action is performed
         movementInput = context.ReadValue<Vector2>();
     }
 
     private void OnMovementCanceled(InputAction.CallbackContext context)
     {
-        // Reset movement when the action is canceled
         movementInput = Vector2.zero;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (conversation == false)
@@ -72,16 +84,16 @@ public class ReisenPlayer : MonoBehaviour
 
     private void Move()
     {
-         if (transform.position.z <= 154 && transform.position.z >= -118)
+        if (transform.position.z <= 154 && transform.position.z >= -118)
         {
             Vector3 moveDirection = new Vector3(0, 0, movementInput.y);
             myCharacterController.Move(moveDirection * moveSpeed * Time.deltaTime);
         }
-         else if (transform.position.z >= 154)
+        else if (transform.position.z >= 154)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
         }
-         else if (transform.position.z <= -118)
+        else if (transform.position.z <= -118)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
         }
@@ -89,15 +101,34 @@ public class ReisenPlayer : MonoBehaviour
 
     void EndConversation()
     {
-        currentPerson.GetComponent<People>().EndConversation();
-        background.GetComponent<Background>().ResumeMovement();
-        background2.GetComponent<Background>().ResumeMovement();
-        peopleSpawner.GetComponent<PeopleSpawner>().ResumeMovement();
+        if (currentPerson != null)
+        {
+            currentPerson.GetComponent<People>().EndConversation();
+        }
+
+        if (background != null)
+            background.GetComponent<Background>().ResumeMovement();
+
+        if (background2 != null)
+            background2.GetComponent<Background>().ResumeMovement();
+
+        if (peopleSpawner != null)
+            peopleSpawner.GetComponent<PeopleSpawner>().ResumeMovement();
+
         conversation = false;
+        kPressCount = 0;
+
+        if (socialBattery != null)
+        {
+            socialBattery.current -= conversationDrainAmount;
+            if (socialBattery.current < socialBattery.minimum)
+                socialBattery.current = socialBattery.minimum;
+        }
+
         Debug.Log("Conversation ended, player can continue.");
     }
 
-    public void StartConversation(GameObject person)     // wird vom 'People.cs' aufgerufen
+    public void StartConversation(GameObject person)
     {
         currentPerson = person;
         conversation = true;

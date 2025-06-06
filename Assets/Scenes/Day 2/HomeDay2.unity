@@ -2026,6 +2026,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasPrompt: {fileID: 1858054431}
+  audioSource: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 8174cb6d610014e43bc01ab722868e91, type: 3}
 --- !u!65 &2076154023
 BoxCollider:
   m_ObjectHideFlags: 0
