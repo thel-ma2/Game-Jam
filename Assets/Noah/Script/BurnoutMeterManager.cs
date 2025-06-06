@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Quest;
 
 public class BurnoutMeterManager : MonoBehaviour
 {
@@ -14,47 +12,18 @@ public class BurnoutMeterManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip burnoutIncreaseSound;
 
-    [Tooltip("Alle QuestSystem-ScriptableObjects, die den Burnout beeinflussen.")]
-    public List<QuestSystem> relevantQuests = new List<QuestSystem>();
-
     private Color originalColor;
 
     private void Start()
     {
-        if (EventManager.Instance != null)
-        {
-            EventManager.Instance.AddListener<BeforeSceneChangeEvent>(OnBeforeSceneChange);
-            EventManager.Instance.AddListener<SceneChangedEvent>(OnSceneChanged);
-        }
-
         if (pointerImage != null)
         {
             originalColor = pointerImage.color;
         }
     }
 
-    private void OnDestroy()
-    {
-        if (EventManager.Instance != null)
-        {
-            EventManager.Instance.RemoveListener<BeforeSceneChangeEvent>(OnBeforeSceneChange);
-            EventManager.Instance.RemoveListener<SceneChangedEvent>(OnSceneChanged);
-        }
-    }
-
-    private void OnBeforeSceneChange(BeforeSceneChangeEvent eventData)
-    {
-        Debug.Log($"BeforeSceneChangeEvent erhalten. Zielszene: {eventData.NextSceneName}");
-        PrüfeUndErhöheBurnoutWert();
-    }
-
-    private void OnSceneChanged(SceneChangedEvent e)
-    {
-        Debug.Log("SceneChangedEvent empfangen");
-        // Falls du hier noch was machen willst nach Szenenwechsel, ansonsten leer lassen
-    }
-
-    public void PrüfeUndErhöheBurnoutWert()
+    // Diese Methode kannst du manuell oder aus einem anderen Script aufrufen
+    public void ErhöheBurnoutWert(int menge = 1)
     {
         if (burnoutScale == null)
         {
@@ -62,46 +31,19 @@ public class BurnoutMeterManager : MonoBehaviour
             return;
         }
 
-        if (relevantQuests == null || relevantQuests.Count == 0)
-        {
-            Debug.LogWarning("Keine relevanten Quests gesetzt.");
-            return;
-        }
+        burnoutScale.current = Mathf.Clamp(
+            burnoutScale.current + menge,
+            burnoutScale.minimum,
+            burnoutScale.maximum
+        );
 
-        int offeneRelevanteQuests = 0;
+        Debug.Log($"Burnout wurde um {menge} erhöht.");
 
-        foreach (QuestSystem quest in relevantQuests)
-        {
-            Debug.Log($"Prüfe Quest: {quest.name}, affectsBurnoutMeter: {quest.affectsBurnoutMeter}, Completed: {quest.Completed}");
+        if (pointerImage != null)
+            StartCoroutine(FlashPointer());
 
-            if (quest.affectsBurnoutMeter && !quest.Completed)
-            {
-                offeneRelevanteQuests++;
-            }
-        }
-
-        Debug.Log($"Anzahl offene relevante Quests: {offeneRelevanteQuests}");
-
-        if (offeneRelevanteQuests > 0)
-        {
-            burnoutScale.current = Mathf.Clamp(
-                burnoutScale.current + offeneRelevanteQuests,
-                burnoutScale.minimum,
-                burnoutScale.maximum
-            );
-
-            Debug.Log($"Burnout erhöht um {offeneRelevanteQuests} Punkte.");
-
-            if (pointerImage != null)
-                StartCoroutine(FlashPointer());
-
-            if (audioSource != null && burnoutIncreaseSound != null)
-                audioSource.PlayOneShot(burnoutIncreaseSound);
-        }
-        else
-        {
-            Debug.Log("Keine offenen relevanten Quests – kein Burnout-Anstieg.");
-        }
+        if (audioSource != null && burnoutIncreaseSound != null)
+            audioSource.PlayOneShot(burnoutIncreaseSound);
     }
 
     private IEnumerator FlashPointer()
