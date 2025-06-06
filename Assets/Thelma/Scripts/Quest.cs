@@ -7,19 +7,34 @@ public class Quest : MonoBehaviour
     public int foundItems = 0;
 
     public TextMeshProUGUI itemsCollected;
+    public GameObject toDoKreuz;
+
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip questComplete;
 
     private void Start()
     {
         foundItems = 0;
-    }
+        toDoKreuz.gameObject.SetActive(false);
 
-    // Update is called once per frame
+        audioSource = GetComponent<AudioSource>();
+    }
     public void ItemsCollected()
     {
         foundItems += 1;
 
-        itemsCollected.text = "Items collected" + foundItems + "/" + requiredItems;
+        itemsCollected.text = "Items collected      " + foundItems + "/" + requiredItems;
+        Debug.Log("Collected " + foundItems);
 
-        Debug.Log("Collected 1");
+
+
+        if (foundItems == requiredItems)
+        {
+            toDoKreuz.gameObject.SetActive(true);
+            audioSource.PlayOneShot(questComplete);
+        }
+        else
+            return;
     }
+    
 }

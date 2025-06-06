@@ -7,6 +7,11 @@ TagManager:
   - Background
   - PeopleSpawner
   - Background2
+  - WGQuestKochen
+  - "WGQuestAufr\xE4umen"
+  - LagerQuestArbeit
+  - "BibQuestB\xFCcher"
+  - SupermarktQuest
   layers:
   - Default
   - TransparentFX

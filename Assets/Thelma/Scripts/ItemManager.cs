@@ -9,10 +9,14 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
 
-    [Header("ItemManager")]
+    [Header("Manager")]
     public bool isFound = false;
     public int amount = 0;
-    public GameObject quest;
+    private GameObject kochen;
+    private GameObject aufraumen;
+    private GameObject arbeit;
+    private GameObject bucher;
+    private GameObject supermarkt;
 
     [Header("Items Lists")]
     public List<GameObject> homeItems;
@@ -20,113 +24,31 @@ public class ItemManager : MonoBehaviour
     public List<GameObject> shoptems;
     public List<GameObject> storageItems;
 
-    /*
-    [Header("Quests")]
-    public List<GameObject> toDo;
-    public GameObject winCanvas;
-    public TextMeshProUGUI winText;
-    public GameObject loseCanvas;
-    public TextMeshProUGUI loseText;
-    private int amountOfQuest = 0;
 
-    [Header("Day 1 Quests")]
-    public bool quest1Day1 = false;
-    public bool quest2Day1 = false;
-    public bool quest3Day1 = false;
-
-    [Header("Day 2 Quests")]
-    public bool quest1Day2 = false;
-    public bool quest2Day2 = false;
-    public bool quest3Day2 = false;
-
-    [Header("Day 3 Quests")]
-    public bool quest1Day3 = false;
-    public bool quest2Day3 = false;
-    public bool quest3Day3 = false;
-
-    [Header("Day 4 Quests")]
-    public bool quest1Day4 = false;
-    public bool quest2Day4 = false;
-    public bool quest3Day4 = false;
-
-    [Header("Day 2 Quests")]
-    public bool quest1Day5 = false;
-    public bool quest2Day5 = false;
-    public bool quest3Day5 = false;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip itemsAufsammeln;
 
     private void Start()
     {
-        winCanvas.SetActive(false);
-        loseCanvas.SetActive(false);
-    }*/
+        audioSource = GetComponent<AudioSource>();
+
+        kochen = GameObject.FindWithTag("WGQuestKochen");
+        aufraumen = GameObject.FindWithTag("WGQuestAufräumen");
+        arbeit = GameObject.FindWithTag("LagerQuestArbeit");
+        bucher = GameObject.FindWithTag("BibQuestBücher");
+        supermarkt = GameObject.FindWithTag("SupermarktQuest");
+    }
 
     public void ItemFound()
     {
         amount += 1;
+        audioSource.PlayOneShot(itemsAufsammeln);
         Debug.Log("Item found " + amount);
 
-        quest.GetComponent<Quest>().ItemsCollected();
+        kochen.GetComponent<Quest>().ItemsCollected();
+        aufraumen.GetComponent<Quest>().ItemsCollected();
+        arbeit.GetComponent<Quest>().ItemsCollected();
+        bucher.GetComponent<Quest>().ItemsCollected();
+        supermarkt.GetComponent<Quest>().ItemsCollected();
     }
-    /*
-    public void UpdateToDo()
-    {
-        if (quest1Day1 == true)
-        {
-
-        }
-
-        /*
-         * if (EndOfQuest())
-        {
-            amountOfQuest += 1;
-        }
-        *//*
-    }
-
-    public void Day1()
-    {
-        
-    }
-
-    public void EndDay1()       // vom Ende der Szene ausgelöst
-    {
-        if (quest1Day1 == true &&  quest2Day1 == true && quest3Day1 == true)
-            winCanvas.SetActive(true);
-        else
-            loseCanvas.SetActive(true);
-    }
-    public void EndDay2()       // vom Ende der Szene ausgelöst
-    {
-        if (quest1Day2 == true && quest2Day2 == true && quest3Day2 == true)
-            winCanvas.SetActive(true);
-        else
-            loseCanvas.SetActive(true);
-    }
-    public void EndDay3()       // vom Ende der Szene ausgelöst
-    {
-        if (quest1Day3 == true && quest2Day3 == true && quest3Day3 == true)
-            winCanvas.SetActive(true);
-        else
-            loseCanvas.SetActive(true);
-    }
-    public void EndDay4()       // vom Ende der Szene ausgelöst
-    {
-        if (quest1Day4 == true && quest2Day4 == true && quest3Day4 == true)
-            winCanvas.SetActive(true);
-        else
-            loseCanvas.SetActive(true);
-    }
-    public void EndDay5()       // vom Ende der Szene ausgelöst
-    {
-        if (quest1Day5 == true && quest2Day5 == true && quest3Day5 == true)
-        {
-            winCanvas.SetActive(true);
-            winText.text = amountOfQuest + "out of 3 Today's Quests completed";
-        }
-        else
-        {
-            loseCanvas.SetActive(true);
-            loseText.text = amountOfQuest + "out of 3 Today's Quests completed";
-        }
-    }*/
 }
