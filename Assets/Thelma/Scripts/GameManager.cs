@@ -1,26 +1,48 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private GameObject player;
+
     [Header("Items")]
     public GameObject item1;
 
     [Header("UI")]
-    [SerializeField] private Canvas startMenü;
+    public Canvas startMenu;
+    public Canvas map;
+    public Canvas winDisplay;
+    public Canvas loseDisplay;
+
     public Canvas gameOverlay;
-    [SerializeField] private Canvas pauseSceen;
-    [SerializeField] private Canvas map;
+    [SerializeField] private GameObject dialogOverlay;
+    [SerializeField] private Canvas pauseOverlay;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        player = GameObject.FindWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DialogueStarted()       // vom player auslï¿½sen
     {
-        
+        player.gameObject.GetComponent<CharacterController>().enabled = false;
+        dialogOverlay.SetActive(true);
+    }
+    public void DialogueEnded()
+    {
+        player.gameObject.GetComponent<CharacterController>().enabled = true;
+        dialogOverlay.SetActive(false);
+    }
+
+    public void QuestCompleted()
+    {
+
+    }
+
+    public void QuestFailed()
+    {
+
     }
 }
