@@ -168,6 +168,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2434983489258786410, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
+      propertyPath: sceneToLoad
+      value: HomeNight 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434983489258786410, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
       propertyPath: timerScript
       value: 
       objectReference: {fileID: 791743679}

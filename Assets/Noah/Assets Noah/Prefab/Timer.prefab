@@ -266,7 +266,10 @@ MonoBehaviour:
   maximumX: 135
   pointerColor: {r: 1, g: 1, b: 1, a: 1}
   endScreenUI: {fileID: 4807187228316559780}
-  delayBeforeSceneSwitch: 2
+  delayBeforeSceneSwitch: 30
+  quest: {fileID: 0}
+  burnoutMeterPrefab: {fileID: 0}
+  burnoutDecreaseAmount: 1
 --- !u!1 &6139197096764263280
 GameObject:
   m_ObjectHideFlags: 0

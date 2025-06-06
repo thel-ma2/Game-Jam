@@ -6,7 +6,7 @@ public class SocialBatterieMinimumScreen : MonoBehaviour
 {
     public SocialBatterie socialBatterie;      // Wird automatisch von "Progress Bar" gesetzt
     public GameObject lowEnergyScreen;         // UI, das angezeigt wird, wenn Batterie leer
-    public TimerEndScreenAndSceneSwitch timerScript; // Referenz auf Timer-Script, um Timer zu stoppen
+    public LinearTimer timerScript;            // Referenz auf Timer-Script, um Timer zu stoppen
 
     public string sceneToLoad = "";            // Name der Szene, die geladen werden soll (leer = nächste)
     public bool switchSceneAfterUI = false;    // Szene nach UI wechseln

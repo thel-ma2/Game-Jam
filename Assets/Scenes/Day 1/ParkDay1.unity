@@ -373,6 +373,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2434983489258786410, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
+      propertyPath: sceneToLoad
+      value: HomeDay2Beginning
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434983489258786410, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
       propertyPath: timerScript
       value: 
       objectReference: {fileID: 570007504}
@@ -837,6 +841,10 @@ PrefabInstance:
     - target: {fileID: 7601604186258265022, guid: 9ca2bcf9290cdcb438ee6e4db69bb1c4, type: 3}
       propertyPath: m_Name
       value: Time
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081316638132367910, guid: 9ca2bcf9290cdcb438ee6e4db69bb1c4, type: 3}
+      propertyPath: angle
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

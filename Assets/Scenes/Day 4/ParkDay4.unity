@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434983489258786410, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
+      propertyPath: sceneToLoad
+      value: HomeDay5Before
+      objectReference: {fileID: 0}
     - target: {fileID: 3759076299380645066, guid: 218741683bd96bb498bc28cd81eba3db, type: 3}
       propertyPath: m_Name
       value: BatterieEmptyMenu 1
