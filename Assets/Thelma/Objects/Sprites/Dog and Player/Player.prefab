@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4254999168953772414}
   - component: {fileID: 7877570684160615651}
-  - component: {fileID: 1109214604718729669}
+  - component: {fileID: 7410917219432197759}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -31,8 +31,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4302096197024475712}
   - {fileID: 7064884975596816262}
+  - {fileID: 4302096197024475712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7877570684160615651
@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredKPressCount: 5
+  moveSpeed: 2
   conversation: 0
---- !u!65 &1109214604718729669
-BoxCollider:
+--- !u!143 &7410917219432197759
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -64,11 +65,15 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 60, y: 110, z: 10}
+  m_Height: 110
+  m_Radius: 30
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 50, z: 0}
 --- !u!1 &2756367984891819395
 GameObject:
@@ -143,8 +148,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -438801229
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1a175de9fc1dbe54da251dfc2c787fbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -183,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 6251427608448342331}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 13, z: -1}
+  m_LocalPosition: {x: -20, y: 19.5, z: -14}
   m_LocalScale: {x: 1.15, y: 1.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -230,9 +235,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -577591011
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9b7f5381addb9734eaa491769ae3c8a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1

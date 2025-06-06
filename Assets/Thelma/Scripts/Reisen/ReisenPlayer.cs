@@ -1,12 +1,14 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class ReisenPlayer : MonoBehaviour
 {
-    private BoxCollider Collider;
     private GameObject currentPerson;
-    private GameObject gameManager;
+    private GameObject background;
+    private GameObject background2;
+    private GameObject peopleSpawner;
 
     //Input System
     private InputSystem_Actions playerControls;
@@ -31,8 +33,11 @@ public class ReisenPlayer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Collider = GetComponent<BoxCollider>();
-        gameManager = GameObject.FindWithTag("GameController");
+        transform.position = new Vector3 (-100, 0, 18);
+
+        background = GameObject.FindWithTag("Background");
+        background2 = GameObject.FindWithTag("Background2");
+        peopleSpawner = GameObject.FindWithTag("PeopleSpawner");
 
         playerControls.Player.Move.performed += OnMovementPerformed;
         playerControls.Player.Move.canceled += OnMovementCanceled;
@@ -67,18 +72,27 @@ public class ReisenPlayer : MonoBehaviour
 
     private void Move()
     {
-        // if (Input.GetKeyDown("w") && transform.position.z < 154 || Input.GetKeyDown(KeyCode.UpArrow) && transform.position.z < 154)
-
-        // if (Input.GetKeyDown("s") && transform.position.z > -118 || Input.GetKeyDown(KeyCode.DownArrow) && transform.position.z > -118)
-
-        Vector3 moveDirection = new Vector3(movementInput.x, 0, movementInput.y);
-
-        myCharacterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+         if (transform.position.z <= 154 && transform.position.z >= -118)
+        {
+            Vector3 moveDirection = new Vector3(0, 0, movementInput.y);
+            myCharacterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+        }
+         else if (transform.position.z >= 154)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+        }
+         else if (transform.position.z <= -118)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+        }
     }
 
     void EndConversation()
     {
         currentPerson.GetComponent<People>().EndConversation();
+        background.GetComponent<Background>().ResumeMovement();
+        background2.GetComponent<Background>().ResumeMovement();
+        peopleSpawner.GetComponent<PeopleSpawner>().ResumeMovement();
         conversation = false;
         Debug.Log("Conversation ended, player can continue.");
     }
@@ -88,6 +102,5 @@ public class ReisenPlayer : MonoBehaviour
         currentPerson = person;
         conversation = true;
         Debug.Log("Entered a Conversation");
-        gameManager.GetComponent<GameManager>().DialogueStarted();
     }
 }

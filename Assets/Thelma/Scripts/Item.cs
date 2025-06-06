@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,9 +10,10 @@ public class Item : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
+            Destroy(gameObject);
+
             manager.GetComponent<ItemManager>().isFound = true;
             manager.GetComponent<ItemManager>().ItemFound();
-            Destroy(gameObject);
         }
     }
 }

@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Background
+  - PeopleSpawner
+  - Background2
   layers:
   - Default
   - TransparentFX

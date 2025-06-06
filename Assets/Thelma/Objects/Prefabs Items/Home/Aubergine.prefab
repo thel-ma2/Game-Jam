@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b69eb32773f374298b030a7859729a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 3184563103136068452, guid: 2bc185fa1bc217346a2b70a37ff3ec95, type: 3}
+  quest: {fileID: 1243270576334212137, guid: e2f94426520ae374fb71fcfe32450393, type: 3}
 --- !u!135 &5117896861942766939
 SphereCollider:
   m_ObjectHideFlags: 0

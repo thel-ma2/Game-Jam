@@ -24,6 +24,8 @@ public class PeopleSpawner : MonoBehaviour
     private int offset4 = -136;
     private float[] heightOffset;
 
+    public bool stop = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,14 +37,17 @@ public class PeopleSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer < spawnRate)
+        if (stop == false)
         {
-            timer = timer + Time.deltaTime;
-        }
-        else
-        {
-            spawnPerson();
-            timer = 0;
+            if (timer < spawnRate)
+            {
+                timer = timer + Time.deltaTime;
+            }
+            else
+            {
+                spawnPerson();
+                timer = 0;
+            }
         }
     }
 
@@ -55,5 +60,14 @@ public class PeopleSpawner : MonoBehaviour
         float selectedPosition = heightOffset[randomHeight];
 
         Instantiate(selectedPerson, new Vector3(transform.position.x, 0, selectedPosition), transform.rotation);
+    }
+
+    public void StopMovement()
+    {
+        stop = true;
+    }
+    public void ResumeMovement()
+    {
+        stop = false;
     }
 }

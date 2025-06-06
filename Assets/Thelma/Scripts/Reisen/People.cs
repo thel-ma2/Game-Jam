@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class People : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class People : MonoBehaviour
 
     BoxCollider myTrigger;
     private bool conversation = false;
+    private GameObject background;
+    private GameObject background2;
+    private GameObject peopleSpawner;
 
     private void Awake()
     {
@@ -27,6 +31,9 @@ public class People : MonoBehaviour
     void Start()
     {
         myTrigger = GetComponent<BoxCollider>();
+        background = GameObject.FindWithTag("Background");
+        background2 = GameObject.FindWithTag("Background2");
+        peopleSpawner = GameObject.FindWithTag("PeopleSpawner");
 
         playerControls.Player.Move.performed += OnMovementPerformed;
         playerControls.Player.Move.canceled += OnMovementCanceled;
@@ -57,17 +64,20 @@ public class People : MonoBehaviour
 
     void Move()
     {
-        Vector3 moveDirection = new Vector3(-2, 0, 0);
+        if (conversation == false)
+        {
+            Vector3 moveDirection = new Vector3(-2, 0, 0);
 
-        myCharacterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+            myCharacterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player" && conversation == false)
+        if (collider.gameObject.tag == "Player")
         {
-            if (collider.gameObject.GetComponent<ReisenPlayer>().conversation == false)
-                StartConversation(collider.gameObject);
+            conversation = false;
+            StartConversation(collider.gameObject);
         }
     }
 
@@ -75,12 +85,14 @@ public class People : MonoBehaviour
     {
         conversation = true;
         player.GetComponent<ReisenPlayer>().StartConversation(gameObject);
+        background.GetComponent<Background>().StopMovement();
+        background2.GetComponent<Background>().StopMovement();
+        peopleSpawner.GetComponent<PeopleSpawner>().StopMovement();
         myTrigger.enabled = false;
     }
 
     public void EndConversation()
     {
         conversation = false;
-        Destroy(gameObject);
     }
 }

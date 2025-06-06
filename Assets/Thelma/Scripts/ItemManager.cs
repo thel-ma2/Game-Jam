@@ -11,7 +11,8 @@ public class ItemManager : MonoBehaviour
 
     [Header("ItemManager")]
     public bool isFound = false;
-    int amount = 0;
+    public int amount = 0;
+    public GameObject quest;
 
     [Header("Items Lists")]
     public List<GameObject> homeItems;
@@ -19,8 +20,9 @@ public class ItemManager : MonoBehaviour
     public List<GameObject> shoptems;
     public List<GameObject> storageItems;
 
+    /*
     [Header("Quests")]
-    public GameObject toDo;
+    public List<GameObject> toDo;
     public GameObject winCanvas;
     public TextMeshProUGUI winText;
     public GameObject loseCanvas;
@@ -56,24 +58,34 @@ public class ItemManager : MonoBehaviour
     {
         winCanvas.SetActive(false);
         loseCanvas.SetActive(false);
-
-        // homeItems = new PrefabAssetType[] { aubergine, brokkoli, butter, eier, fisch, knoblauch, käse, reis, salzPfeffer, zwiebel };
-    }
+    }*/
 
     public void ItemFound()
     {
         amount += 1;
         Debug.Log("Item found " + amount);
-    }
 
+        quest.GetComponent<Quest>().ItemsCollected();
+    }
+    /*
     public void UpdateToDo()
     {
+        if (quest1Day1 == true)
+        {
+
+        }
+
         /*
          * if (EndOfQuest())
         {
             amountOfQuest += 1;
         }
-        */
+        *//*
+    }
+
+    public void Day1()
+    {
+        
     }
 
     public void EndDay1()       // vom Ende der Szene ausgelöst
@@ -116,5 +128,5 @@ public class ItemManager : MonoBehaviour
             loseCanvas.SetActive(true);
             loseText.text = amountOfQuest + "out of 3 Today's Quests completed";
         }
-    }
+    }*/
 }
