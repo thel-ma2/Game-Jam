@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdf390c56744bc4aa7cfc356c7627b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  socialBattery: {fileID: 0}
+  conversationDrainAmount: 10
   walkingSound: {fileID: 0}
   cookingSound: {fileID: 0}
   eatingSound: {fileID: 0}
   talkingSound: {fileID: 0}
-  requiredKPressCount: 20
+  requiredKPressCount: 10
   moveSpeed: 150
   conversation: 0
 --- !u!82 &6367056198861207352

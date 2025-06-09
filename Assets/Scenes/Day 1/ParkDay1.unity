@@ -506,6 +506,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8659264394492022806, guid: 4659c9deda9611e43bb7815cd475b598, type: 3}
+      propertyPath: timerDuration
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -615,6 +619,10 @@ PrefabInstance:
     - target: {fileID: 6735291996090271284, guid: 2dc14496c0fcd6a4d9a5b46fd576ddbc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805408019480537316, guid: 2dc14496c0fcd6a4d9a5b46fd576ddbc, type: 3}
+      propertyPath: m_text
+      value: Avoid the peopler and press K a lot of times to end a conversation
       objectReference: {fileID: 0}
     - target: {fileID: 8395563088352543261, guid: 2dc14496c0fcd6a4d9a5b46fd576ddbc, type: 3}
       propertyPath: m_Name
